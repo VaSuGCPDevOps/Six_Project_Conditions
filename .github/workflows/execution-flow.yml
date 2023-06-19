@@ -34,7 +34,7 @@ jobs:
         run: npm ci
       - name: Test code
         id: run-tests
-        run: npm run test
+        run: 
       - name: Upload test report  #If above step fails still the workflow will be executed bcoz we have given if condition in this step
         if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v3

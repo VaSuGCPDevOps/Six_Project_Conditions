@@ -31,9 +31,10 @@ jobs:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        continue-on-error: true
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test code
+        continue-on-error: true
         id: run-tests
         run: npm run test
       - name: Upload test report  #If above step fails still the workflow will be executed bcoz we have given if condition in this step

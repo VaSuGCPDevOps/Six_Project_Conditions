@@ -7,8 +7,14 @@ jobs:
   build:
     strategy:
       matrix:
-        operating-system: [ubuntu-machine, windows-server]
+        operating-system: [ubuntu-latest, windows-latest]
         node-version: [12,14,16]
+        include:  #we can include the values that run on single instace
+          - node-version: 18
+            operating-system: ubuntu-latest
+        exclude: #we can exclude the values that will not run in the instance.
+          - node-version: 12
+            operating-system: windows-latest
     runs-on: ${{ matrix.operating-system }}
     steps:
       - name: get code
